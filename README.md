@@ -15,30 +15,30 @@ The queue have limited capacity K and processes may be blocked (if queue is full
 import QAnalytic
 import QSim
 
-if __name__ == "__main__":
+#if __name__ == "__main__":
 # set parameters
-    mu = 1 # service rate
-    theta = 2 # deadline rate or deadline time
-    lambdas = 5 # arrival rate of customers
-    num_customers = 10 ** 6 #number of customers in simulation 
-    queue_size = 12 #size of queue
-    is_exp_drop = True # or False
+mu = 1 # service rate
+theta = 2 # deadline rate or deadline time
+lambdas = 5 # arrival rate of customers
+num_customers = 10 ** 6 #number of customers in simulation 
+queue_size = 12 #size of queue
+is_exp_drop = True # or False
     
-    simulator = QSim.simulator(lambdas,
+simulator = QSim.simulator(lambdas,
+                            mu,
+                            theta,
+                            queue_size,
+                            is_exp_drop)
+
+analyzer = QAnalytic.analyzer(lambdas,
                                 mu,
                                 theta,
                                 queue_size,
                                 is_exp_drop)
 
-    analyzer = QAnalytic.analyzer(lambdas,
-                                  mu,
-                                  theta,
-                                  queue_size,
-                                  is_exp_drop)
-
-            sim_pb, sim_pd = simulator.run(num_customers)
-            anal_pb, anal_pd = analyzer.run()
-            print(f"is_exp_drop:{is_exp_drop}, lambda:{lambdas}, mu:{mu}, theta:{theta} => simulation pb:{sim_pb}, analytic pb:{anal_pb}, simulation pd:{sim_pd}, analytic pd:{anal_pd} \n")
+sim_pb, sim_pd = simulator.run(num_customers)
+anal_pb, anal_pd = analyzer.run()
+print(f"is_exp_drop:{is_exp_drop}, lambda:{lambdas}, mu:{mu}, theta:{theta} => simulation pb:{sim_pb}, analytic pb:{anal_pb}, simulation pd:{sim_pd}, analytic pd:{anal_pd} \n")
 ```
 
 ## Parameters
